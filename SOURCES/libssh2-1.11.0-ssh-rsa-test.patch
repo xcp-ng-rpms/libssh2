@@ -3,9 +3,14 @@ so we need to re-enable them as a workaround for the test
 suite until upstream updates the tests.
 
 See: https://github.com/libssh2/libssh2/issues/630
+---
+ tests/test_sshd.test | 2 ++
+ 1 file changed, 2 insertions(+)
 
---- tests/test_sshd.test
-+++ tests/test_sshd.test
+diff --git a/tests/test_sshd.test b/tests/test_sshd.test
+index ac6d386..63ac482 100755
+--- a/tests/test_sshd.test
++++ b/tests/test_sshd.test
 @@ -79,6 +79,8 @@ chmod go-rwx \
    -o "AuthorizedKeysFile ${PUBKEY} ${d}/openssh_server/authorized_keys" \
    -o "TrustedUserCAKeys ${cakeys}" \
@@ -15,3 +20,6 @@ See: https://github.com/libssh2/libssh2/issues/630
    -D \
    ${SSHD_FLAGS} &
  sshdpid=$!
+-- 
+2.43.0
+

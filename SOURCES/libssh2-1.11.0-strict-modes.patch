@@ -3,8 +3,14 @@ run the tests from can cause failures due to openssh's strict
 permissions checks. Adding this option helps the tests to run
 more reliably on a variety of build systems.
 
---- tests/test_sshd.test
-+++ tests/test_sshd.test
+---
+ tests/test_sshd.test | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tests/test_sshd.test b/tests/test_sshd.test
+index ccfede9..ac6d386 100755
+--- a/tests/test_sshd.test
++++ b/tests/test_sshd.test
 @@ -71,6 +71,7 @@ chmod go-rwx \
  # shellcheck disable=SC2086
  "${SSHD}" \
@@ -13,3 +19,6 @@ more reliably on a variety of build systems.
    -o 'Port 4711' \
    -h "${d}/openssh_server/ssh_host_rsa_key" \
    -h "${d}/openssh_server/ssh_host_ecdsa_key" \
+-- 
+2.43.0
+
