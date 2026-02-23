@@ -1,0 +1,25 @@
+In 8.8 OpenSSH disabled sha1 rsa-sha keys out of the box,
+so we need to re-enable them as a workaround for the test
+suite until upstream updates the tests.
+
+See: https://github.com/libssh2/libssh2/issues/630
+---
+ tests/test_sshd.test | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/tests/test_sshd.test b/tests/test_sshd.test
+index ac6d386..63ac482 100755
+--- a/tests/test_sshd.test
++++ b/tests/test_sshd.test
+@@ -79,6 +79,8 @@ chmod go-rwx \
+   -o "AuthorizedKeysFile ${PUBKEY} ${d}/openssh_server/authorized_keys" \
+   -o "TrustedUserCAKeys ${cakeys}" \
+   -o 'PermitRootLogin yes' \
++  -o 'HostKeyAlgorithms +ssh-rsa' \
++  -o 'PubkeyAcceptedAlgorithms +ssh-rsa' \
+   -D \
+   ${SSHD_FLAGS} &
+ sshdpid=$!
+-- 
+2.43.0
+

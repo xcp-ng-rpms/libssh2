@@ -1,0 +1,27 @@
+From 1450d5864d62e63b0efa0d9aabdc1ca143ba5659 Mon Sep 17 00:00:00 2001
+From: Deli Zhang <deli.zhang@citrix.com>
+Date: Fri, 20 Sep 2024 15:03:34 +0000
+Subject: [PATCH] CP-50289: Remove ssh-dss key type from tests
+
+OpenSSH 9.8p1 does not support ssh-dss, so need to remove it from
+tests configuration, otherwise error is reported:
+  /builddir/build/BUILD/libssh2-1.11.0/tests/openssh_server/sshd_config line 2: Bad key types '+ssh-rsa,ssh-dss,ssh-rsa-cert-v01@openssh.com'.
+
+Signed-off-by: Deli Zhang <deli.zhang@citrix.com>
+---
+ tests/openssh_server/sshd_config | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/openssh_server/sshd_config b/tests/openssh_server/sshd_config
+index 1069566..5cd2b89 100644
+--- a/tests/openssh_server/sshd_config
++++ b/tests/openssh_server/sshd_config
+@@ -1,4 +1,4 @@
+ HostKeyAlgorithms +ssh-rsa
+-PubkeyAcceptedKeyTypes +ssh-rsa,ssh-dss,ssh-rsa-cert-v01@openssh.com
++PubkeyAcceptedKeyTypes +ssh-rsa,ssh-rsa-cert-v01@openssh.com
+ MACs +hmac-sha1,hmac-sha1-96,hmac-sha2-256,hmac-sha2-512,hmac-md5,hmac-md5-96,umac-64@openssh.com,umac-128@openssh.com,hmac-sha1-etm@openssh.com,hmac-sha1-96-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-md5-etm@openssh.com,hmac-md5-96-etm@openssh.com,umac-64-etm@openssh.com,umac-128-etm@openssh.com
+ Ciphers +3des-cbc,aes128-cbc,aes192-cbc,aes256-cbc,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com
+-- 
+2.43.0
+
