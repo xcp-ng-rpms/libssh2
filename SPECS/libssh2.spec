@@ -5,7 +5,7 @@
 
 Name:		libssh2
 Version:	1.11.0
-Release:	%{?xsrel}%{?dist}
+Release:	%{?xsrel}.1%{?dist}
 Summary:	A library implementing the SSH2 protocol
 License:	BSD-3-Clause
 URL:		https://www.libssh2.org/
@@ -13,6 +13,13 @@ Source0: libssh2-1.11.0.tar.gz
 Patch0: libssh2-1.11.0-strict-modes.patch
 Patch1: libssh2-1.11.0-ssh-rsa-test.patch
 Patch2: 0001-CP-50289-Remove-ssh-dss-key-type-from-tests.patch
+
+# XCP-ng patches
+Patch1000: libssh2-1.11.0-CVE-2026-58051-publickey-fix-potential-arbitrary-free-in-libssh2_pu.patch
+Patch1001: libssh2-1.11.0-CVE-2026-66032-Prevent-dangling-pointer-by-nullifying-data-2180.patch
+Patch1002: libssh2-1.11.0-CVE-2026-66035-transport-fix-potential-heap-overflow-on-ETM-decrypt.patch
+Patch1003: libssh2-1.11.0-CVE-2026-66034-publickey-fix-potential-OOB-read-in-libssh2_publicke.patch
+Patch1004: libssh2-1.11.0-CVE-2026-66033-openssl-fix-potential-OOB-read-write-with-AES-GCM-in.patch
 
 BuildRequires:	coreutils
 BuildRequires:	findutils
@@ -115,6 +122,11 @@ LC_ALL=en_US.UTF-8 make -C tests check
 %{_libdir}/pkgconfig/libssh2.pc
 
 %changelog
+* Tue Nov 10 2026 Lucas Ravagnier <lucas.ravagnier@vates.tech> - 1.11.0-1.1
+- Backport security fixes:
+  CVE-2026-58051, CVE-2026-66032, CVE-2026-66033, CVE-2026-66034,
+  CVE-2026-66035
+
 * Thu Aug 22 2024 Deli Zhang <deli.zhang@citrix.com> - 1.11.0-1
 - First imported release
 
