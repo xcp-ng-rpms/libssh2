@@ -5,7 +5,7 @@
 
 Name:		libssh2
 Version:	1.11.0
-Release:	%{?xsrel}.1%{?dist}
+Release:	%{?xsrel}.2%{?dist}
 Summary:	A library implementing the SSH2 protocol
 License:	BSD-3-Clause
 URL:		https://www.libssh2.org/
@@ -122,6 +122,9 @@ LC_ALL=en_US.UTF-8 make -C tests check
 %{_libdir}/pkgconfig/libssh2.pc
 
 %changelog
+* Mon Nov 16 2026 Vincent Michel <vincent.michel@vates.tech> - 1.11.0-1.2
+- Rebuild with OpenSSL 3.5.7
+
 * Fri Nov 13 2026 Lucas Ravagnier <lucas.ravagnier@vates.tech> - 1.11.0-1.1
 - Backport five upstream security fixes:
 - CVE-2026-58051: publickey - fix potential arbitrary free
